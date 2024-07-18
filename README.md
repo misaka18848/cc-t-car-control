@@ -1,7 +1,7 @@
 # cc-t-car-control
 通过CC电脑使用5档变速在Minecraft里开车。欢迎提交issue和PR，如果觉得这个项目不错，请在右上角点个star。<br>
 
-Drive your car in Minecraft with 5-speed gear shifting via CC computer. Feel free to submit issues and PRs, and if you like this project, please give me a star.<br><br>
+Drive your car in Minecraft with 5-speed gear shifting via CC:tweaked. Feel free to submit issues and PRs, and if you like this project, please give me a star.<br><br>
 
 ## 需要MOD:<br>
 
