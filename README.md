@@ -3,9 +3,9 @@
 
 Drive your car in Minecraft with 5-speed gear shifting via CC computer. Feel free to submit issues and PRs, and if you like this project, please give me a star.<br><br>
 
-##需要MOD:<br>
+## 需要MOD:<br>
 
-##Required MODs:<br><br>
+## Required MODs:<br><br>
 
 cc:tweaked<br>
 vs_addition<br>
@@ -14,9 +14,9 @@ create_addition<br>
 trackwork<br>
 clockwork<br>
 valkyrienskies<br><br>
-##如何使用:<br>
+## 如何使用:<br>
 
-##How to Use:<br><br>
+## How to Use:<br><br>
 
 将startup.lua放在计算机里。<br>
 Place startup.lua inside the computer.<br>
