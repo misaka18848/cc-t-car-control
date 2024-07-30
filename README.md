@@ -11,6 +11,7 @@ Drive your car in Minecraft with 5-speed gear shifting via CC:tweaked. Feel free
 
 cc:tweaked<br>
 vs_addition<br>
+void power<br>
 create<br>
 create_addition<br>
 Advanced Peripherals<br>
@@ -21,8 +22,8 @@ valkyrienskies<br><br>
 
 ## How to Use:<br><br>
 
-将startup.lua放在计算机里。<br>
-Place startup.lua inside the computer.<br>
+将startup.lua和其他文件放在计算机里。<br>
+Place startup.lua and other files inside the computer.<br>
 参考lua文件开头注释内容将设备使用有线网络连接上电脑并修改设备名称和方向为你用的设备名称和方向<br>
 Referring to the comment content at the beginning of the Lua file, connect the device to your computer via a wired network connection and modify the device name and orientation to match the name and orientation of the device you are using.<br>
 启动计算机。<br>
