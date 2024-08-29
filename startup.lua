@@ -1,7 +1,7 @@
 
 --左侧屏幕名称
-local Lscreen = "monitor_7"
---右侧屏幕名称
+local Lscreen = "monitor_9"
+--右侧屏幕(至少俩格宽)名称
 local Rscreen = "monitor_5"
 --左侧屏幕是否透明
 local LscreenTransparent = true
@@ -32,7 +32,7 @@ screen.setCursorPos(2,2)
 screen.blit("carOS","000ff","ccc00")
 os.sleep(1)
 screen.setCursorPos(3,1) 
-screen.blit("4.0","fff","444")
+screen.blit("5.0","fff","444")
 os.sleep(1)
 screen.setCursorPos(2,4) 
 screen.blit("MISAKA","000000","111111")
@@ -73,6 +73,14 @@ local speaker_name = "speaker_1"
 local speaker1_name = "speaker_2"
 --启用汽车音效
 local Car_Audio = false
+--掌上无线/末影电脑id
+local padid = 14
+--后侧raycaster名称
+local brc_name = "raycaster_0"
+--前侧raycaster名称
+local frc_name = "raycaster_1"
+--无线调制解调器装在电脑的哪侧
+local wirelessmodem = "front"
 --玩家检测器名称
 local playerDetector_name = "playerDetector_0"
 --锁车距离
@@ -105,14 +113,15 @@ local carnameautocolor1 = true
 local carnameautocolor2 = true
 
 local bootcheck = true
-
+local bootcheck2 = true
+local screen1width, screen1height =screen1.getSize()
 screen1.setTextScale(0.5)
 screen1.setCursorPos(1,1)
 screen1.setTextColor(colors.white)
 screen1.write(os.version())
 os.sleep(0.1)
 screen1.setCursorPos(1,2)
-screen1.write("LRScreen")
+screen1.write("RScreen")
 os.sleep(0.1)
 screen1.setCursorPos(1,3)
 screen1.write("PD")
@@ -133,13 +142,13 @@ screen1.setCursorPos(1,8)
 screen1.write("Battery")
 os.sleep(0.1)
 screen1.setCursorPos(1,9)
-screen1.write("Speakers")
-os.sleep(0.1)
-screen1.setCursorPos(1,10)
 screen1.write("Motor")
 os.sleep(0.1)
+screen1.setCursorPos(1,10)
+screen1.write("check1/2")
+os.sleep(0.1)
 screen1.setCursorPos(11,2)
-if peripheral.isPresent(Lscreen) == false or peripheral.isPresent(Rscreen) == false then
+if peripheral.isPresent(Rscreen) == false then
     screen1.setTextColor(colors.red)
     screen1.write('Error')
     bootcheck = false
@@ -209,16 +218,6 @@ else
 end
 os.sleep(0.1)
 screen1.setCursorPos(11,9)
-if peripheral.isPresent(speaker_name) == false or peripheral.isPresent(speaker1_name) == false then
-    screen1.setTextColor(colors.red)
-    screen1.write('Error')
-    bootcheck = false
-else
-    screen1.setTextColor(colors.green)
-    screen1.write('Done')
-end
-os.sleep(0.1)
-screen1.setCursorPos(11,10)
 if peripheral.isPresent(motor_name) == false then
     screen1.setTextColor(colors.red)
     screen1.write('Error')
@@ -232,10 +231,116 @@ screen1.setCursorPos(12,1)
 if bootcheck == false then
     screen1.setTextColor(colors.red)
     screen1.write('Warn')
-    os.shutdown()
+    os.sleep(5)
+    os.reboot()
 else
     screen1.setTextColor(colors.green)
     screen1.write('Done')
+    os.sleep(1)
+end
+screen1.clear()
+screen1.setTextScale(0.5)
+screen1.setCursorPos(1,1)
+screen1.setTextColor(colors.white)
+screen1.write(os.version())
+os.sleep(0.1)
+screen1.setCursorPos(1,2)
+screen1.write("LScreen")
+os.sleep(0.1)
+screen1.setCursorPos(1,3)
+screen1.write("AUSpeaker")
+os.sleep(0.1)
+screen1.setCursorPos(1,4)
+screen1.write("MUSpeaker")
+os.sleep(0.1)
+screen1.setCursorPos(1,5)
+screen1.write("Fraycaster")
+os.sleep(0.1)
+screen1.setCursorPos(1,6)
+screen1.write("Braycaster")
+os.sleep(0.1)
+screen1.setCursorPos(1,7)
+screen1.write("WIFI")
+os.sleep(0.1)
+screen1.setCursorPos(1,10)
+screen1.write("check2/2")
+os.sleep(0.1)
+screen1.setCursorPos(11,2)
+if peripheral.isPresent(Lscreen) == true and screen1width >=30 then
+    screen1.setTextColor(colors.green)
+    screen1.write('Done')
+else
+    screen1.setTextColor(colors.red)
+    screen1.write('Error')
+    bootcheck2 = false
+end
+os.sleep(0.1)
+screen1.setCursorPos(11,3)
+if peripheral.isPresent(speaker_name) == false then
+    screen1.setTextColor(colors.red)
+    screen1.write('Error')
+    bootcheck2 = false
+else
+    screen1.setTextColor(colors.green)
+    screen1.write('Done')
+end
+os.sleep(0.1)
+screen1.setCursorPos(11,4)
+if peripheral.isPresent(speaker1_name) == false then
+    screen1.setTextColor(colors.red)
+    screen1.write('Error')
+    bootcheck2 = false
+else
+    screen1.setTextColor(colors.green)
+    screen1.write('Done')
+end
+os.sleep(0.1)
+screen1.setCursorPos(11,5)
+if peripheral.isPresent(frc_name) == false then
+    screen1.setTextColor(colors.red)
+    screen1.write('Error')
+    bootcheck2 = false
+else
+    screen1.setTextColor(colors.green)
+    screen1.write('Done')
+end
+os.sleep(0.1)
+screen1.setCursorPos(11,6)
+if peripheral.isPresent(brc_name) == false then
+    screen1.setTextColor(colors.red)
+    screen1.write('Error')
+    bootcheck2 = false
+else
+    screen1.setTextColor(colors.green)
+    screen1.write('Done')
+end
+os.sleep(0.1)
+screen1.setCursorPos(11,7)
+if peripheral.isPresent(wirelessmodem) == true then
+    if peripheral.wrap(wirelessmodem).isWireless() == true then
+        screen1.setTextColor(colors.green)
+        screen1.write('Done')
+    else
+        screen1.setTextColor(colors.red)
+        screen1.write('Error')
+        bootcheck2 = false
+    end
+else
+    screen1.setTextColor(colors.red)
+    screen1.write('Error')
+    bootcheck2 = false
+end
+os.sleep(0.1)
+screen1.setCursorPos(12,1)
+if bootcheck2 == false then
+    screen1.setTextColor(colors.red)
+    screen1.write('Warn')
+    os.sleep(5)
+    os.reboot()
+else
+    screen1.setTextColor(colors.green)
+    screen1.write('Done')
+    os.sleep(1)
 end
 
 local da = peripheral.wrap(da_name)
@@ -248,7 +353,10 @@ local redstoneintegrator_input1 = peripheral.wrap(RIinput1)
 local RIoutputLeftWheelandLight = peripheral.wrap(RILWL)
 local RIoutputRightWheelandLight = peripheral.wrap(RIRWL)
 local pd = peripheral.wrap(playerDetector_name)
-
+local brc = peripheral.wrap(brc_name)
+local frc = peripheral.wrap(frc_name)
+local padmessage = {}
+local carsend = {}
 local lock = true
 local gear = "0"
 local nextgear = "0"
@@ -260,6 +368,43 @@ local motorspeedlv1 = 1
 local motorspeedlv2 = 50
 local motorspeedlv3 = 150
 local motorspeedlv4 = 256
+--显示方块设置
+local data = {
+    block = {
+        minecraft = {
+            gold_block = "4",
+    
+            polished_diorite = "8",
+            stone = "8",
+            iron_ore = "8",
+            gravel = "8",
+            coal_ore = "8",
+            emerald_ore = "8",
+    
+            waxed_cut_copper_slab = "1",
+            spruce_door = "1",
+            dirt = "1",
+    
+            oak_planks = "c",
+            lectern = "c",
+            oak_log = "c",
+            acacia_log = "c",
+    
+            grass_block = "d",
+            grass = "d",
+            tall_grass = "d",
+    
+            oak_leaves = "5",
+            acacia_leaves = "5",
+    
+            crimson_planks = "a",
+            }
+        }
+    }
+local item = {}
+local backitem = {}
+local backwebitem = {}
+local wpix = ""
 local RPM = 0
 local ownercheck={}
 local TRPM = 0
@@ -269,6 +414,7 @@ local function display3number(number)
 end
 
 ship.setName(carname)
+rednet.open(wirelessmodem)
 
 local batterylink = "off"
 local musicpause = "on"
@@ -284,6 +430,7 @@ local allmusic = #musicfiles
 local nowplayname = "PLAY"
 local displaymusicname = {}
 local currentIndex = 1
+local campix = 1
 local carpos = ship.getWorldspacePosition()
 local lockpos1 = {}
 local lockpos2 = {}
@@ -305,7 +452,6 @@ local blackcarname = " "
 local function intToHexChar(num)
     return string.char(48 + num + (num > 9 and 39 or 0))
 end
-
 local namecolor1 = carnamecolor1
 local namecolor2 = carnamecolor2
 local displaycarname = carname
@@ -313,20 +459,83 @@ for i = 2, #displaycarname, 1 do
     namecolor1 = namecolor1 .. carnamecolor1
     namecolor2 = namecolor2 .. carnamecolor2
 end
+local euler_mode = false
+local cache = true
+local webcamwidth = 26
+local webcamheight = 16
+local backcamwidth = 15
+local backcamheight = 10
+local width_yaw_range = math.rad(45)
+local height_pitch_range = math.rad(45)
+local max_distance = 30
+local vector_fov = 1
 local rsinput_left = false
 local rsinput_right = false
 local rsinput_speedup = false
 local rsinput_speeddown = false
 local rsinput1_downgear = false
 local rsinput_upgear = false
-
+local batterytext = ""
 local ottoup = false
 local ottodown = false
+local buffer = {}
+local pix = {}
+local table_insert = table.insert
 
+local function linspace(start, end_, num)
+    local linspaced = {}
+    if num == 0 then return linspaced end
+    if num == 1 then
+        table_insert(linspaced, start)
+        return linspaced
+    end
+
+    local delta = (end_ - start) / (num - 1)
+
+    for i = 0, num-2 do
+        table_insert(linspaced, start+delta*i)
+    end
+    table_insert(linspaced, end_)
+
+    return linspaced
+end
+
+local function split(inputstr, sep)
+    if sep == nil then sep = "%s" end
+    local t={}
+    for str in string.gmatch(inputstr, "([^"..sep.."]+)") do table.insert(t, str) end
+    return t
+end
+
+local function get_pixel_normal(item)
+    if item.is_block then
+        local res = data
+        for _, key in ipairs(split(item.block_type, ".")) do
+            res = res[key]
+            if res == nil then return {" ", "0", "b"} end
+        end
+        if res == nil then return {" ", "0", "b"} end
+        return {" ", "0", res}
+    end
+
+    return {" ", "0", "e"}
+end
+local yr = 1
+local xr = 1
+local y_axis = {}
+local x_axis = {}
 local time = textutils.formatTime(os.time())
 if #time == 7 then
     time = 0 .. time
 end
+
+local function backrc()
+    backitem = brc.raycast(max_distance, {yr, -1 * xr, vector_fov}, euler_mode, true, cache, true)
+    return backitem
+end
+local basu = true
+local bawsu = true
+
 local function caraudio(nowplayaudio)
     if Car_Audio == true then
         if gear == nextgear and carbreak == "off" and caraudioplay == true then
@@ -335,7 +544,7 @@ local function caraudio(nowplayaudio)
                     speaker1.stop()
                     break
                 end
-                local buffer = decoder(chunk)
+                buffer = decoder(chunk)
                 while not speaker1.playAudio(buffer) do
                     os.pullEvent("speaker_audio_empty")
                 end
@@ -348,7 +557,7 @@ local function caraudio(nowplayaudio)
         end
         if gear ~= nextgear then
             for chunk in io.lines("caraudio/shiftgear.dfpwm", 16 * 1024) do
-                local buffer = decoder(chunk)
+                buffer = decoder(chunk)
                 while not speaker1.playAudio(buffer) do
                     os.pullEvent("speaker_audio_empty")
                 end
@@ -357,7 +566,7 @@ local function caraudio(nowplayaudio)
         end
         if carbreak == "on" and gear == nextgear then
             for chunk in io.lines("caraudio/handbreak.dfpwm", 16 * 1024) do
-                local buffer = decoder(chunk)
+                buffer = decoder(chunk)
                 while not speaker1.playAudio(buffer) do
                     os.pullEvent("speaker_audio_empty")
                 end
@@ -447,7 +656,7 @@ screen1.blit("1234",'0fff','5000')
 
 
 screen1.setCursorPos(1,7)
-screen1.blit("4.0",'fff','444')
+screen1.blit("5.0",'fff','444')
 screen1.setCursorPos(1,8)
 screen1.blit("carOS",'000ff','ccc00')
 screen1.setCursorPos(1,9)
@@ -494,7 +703,7 @@ local function speedGUI()
                     trygear = '5'
                     mousey = -1
                 end
-                if mousex <= 5 and mousey == 4 and mousex >= 1 then
+                if (mousex <= 5 and mousey == 4 and mousex >= 1) or padmessage[5] == "break" then
                     screen.setTextScale(1)
                     screen.setCursorPos(1,4)
                     screen.blit("BREAK",'00000','eeeee')
@@ -506,16 +715,18 @@ local function speedGUI()
                     nextgear = "0"
                     os.sleep(0.5)
                     mousey = -1
+                    padmessage[5] = ""
                 end
             end
             if carbreak == "on" then
-                if mousex <= 5 and mousey == 4 and mousex >= 1 then
+                if (mousex <= 5 and mousey == 4 and mousex >= 1) or padmessage[5] == "break" then
                     screen.setTextScale(1)
                     screen.setCursorPos(1,4)
                     screen.blit("BREAK",'fffff','00000')
                     carbreak = "off"
                     os.sleep(0.5)
                     mousey = -1
+                    padmessage[5] = ""
                 end
             end
         end
@@ -1536,8 +1747,9 @@ end
 
 local function gearcontrol()
     while true do
+        print(padmessage[2])
         if carbreak == "off" then
-            if rsinput1_downgear == true and rsinput_upgear == false then
+            if (rsinput1_downgear == true and rsinput_upgear == false) or padmessage[2] == "downgear" then
                 if gear == nextgear then
                     if gear == "0" then
                         trygear = "R"
@@ -1563,13 +1775,11 @@ local function gearcontrol()
                         trygear = "4" 
 
                     end
-                    print(rsinput_upgear)
-                    print(rsinput1_downgear)
-                    print(" ")
                     rsinput1_downgear = false
+                    padmessage[2] = ""
                 end
             end
-            if rsinput1_downgear == false and rsinput_upgear == true then
+            if (rsinput1_downgear == false and rsinput_upgear == true) or padmessage[2] == "upgear" then
                 if gear == nextgear then
                     if gear == "0" then
                         trygear = "1"
@@ -1595,10 +1805,8 @@ local function gearcontrol()
                         trygear = "0" 
 
                     end
-                    print(rsinput_upgear)
-                    print(rsinput1_downgear)
-                    print(" ")
                     rsinput_upgear = false
+                    padmessage[2] = ""
                 end
             end
             if trygear == "R" and RPM <= 0 and RPM >= -30 then
@@ -1630,7 +1838,7 @@ end
 local function speedcontrol()
     while true do
         TRPM = RPM
-        if rsinput_speedup == false and rsinput_speeddown == false and carbreak == "off" then
+        if rsinput_speedup == false and rsinput_speeddown == false and carbreak == "off" and (padmessage[4] == "" or type(padmessage[4]) == "nil") then
             if gear == "R" then
                 if RPM < -12 then
                     RPM = RPM + 1
@@ -1728,7 +1936,7 @@ local function speedcontrol()
                 end
             end
         end
-        if rsinput_speedup == true and rsinput_speeddown == false and carbreak == "off"  and lock == false then
+        if (rsinput_speedup == true and rsinput_speeddown == false and carbreak == "off"  and lock == false) or (padmessage[4] == "up" and carbreak == "off") then
             screen.setTextScale(1)
             screen.setCursorPos(5,2)
             screen.blit(display3number(RPM),"fff","444")
@@ -1802,7 +2010,7 @@ local function speedcontrol()
             end
             os.sleep(0.01)   
         end
-        if rsinput_speedup == false and rsinput_speeddown == true and carbreak == "off"  and lock == false then
+        if (rsinput_speedup == false and rsinput_speeddown == true and carbreak == "off"  and lock == false) or (padmessage[4] == "down" and carbreak == "off") then
             if RPM < 0 then
                 RPM = RPM + 1
                 screen.setTextScale(1)
@@ -1848,7 +2056,7 @@ end
 local function batteryGUI()
     while true do
         if battery == nil then
-            local batterytext = "|||"
+            batterytext = "|||"
             screen.setTextScale(1)
             screen.setCursorPos(4,1)
             screen.blit(batterytext:sub(1,1),"0","f")
@@ -1857,7 +2065,7 @@ local function batteryGUI()
             screen.setCursorPos(4,3)
             screen.blit(batterytext:sub(3,3),"0","f")
         else
-            local batterytext = display3number(math.floor(battery.getPercent()))
+            batterytext = display3number(math.floor(battery.getPercent()))
             if event == "monitor_touch" and monitorside == Rscreen  and lock == false then
                 if mousey <= 3 and mousex == 4 and mousey >= 1 and batterylink == "on" then
                     screen.setTextScale(1)
@@ -2032,7 +2240,7 @@ local function musiccontrol()
     while true do
         if musicpause == "off" then
             for chunk in io.lines("music/"..musicfiles[nowplaymusic], 16 * 1024) do
-                local buffer = decoder(chunk)
+                buffer = decoder(chunk)
                 if musicpause == "on" then
                     speaker.stop()
                     break
@@ -2098,10 +2306,10 @@ local function rsinput()
         rsinput_speeddown = redstoneintegrator_input.getInput(RIinput_speeddown)
         rsinput_upgear = redstoneintegrator_input.getInput(RIinput_upgear)
         rsinput1_downgear = redstoneintegrator_input1.getInput(RIinput1_downgear)
-        if rsinput_left == true and swheel ~= -15 and rsinput_right == false  and lock == false then
+        if (rsinput_left == true and swheel ~= -15 and rsinput_right == false  and lock == false) or (padmessage[3] == "left" and swheel ~= -15) then
             swheel = swheel - 1
         end
-        if rsinput_right == true and swheel ~= 15 and rsinput_left == false  and lock == false then
+        if (rsinput_right == true and swheel ~= 15 and rsinput_left == false  and lock == false) or (padmessage[3] == "right" and swheel ~= 15) then
             swheel = swheel + 1
         end
         os.sleep(0.01)
@@ -2287,7 +2495,7 @@ end
 
 local function swheelback()
     while true do
-        if rsinput_left == false and rsinput_right == false then
+        if (rsinput_left == false and rsinput_right == false) and (padmessage[3] == "" or padmessage[3] == nil) then
             if swheel > 0 then
                 swheel = swheel - 1
             end
@@ -2549,7 +2757,7 @@ local function lockGUI()
             ownercheck[i]=pd.isPlayerInCoords(lockpos1,lockpos2,ownername[i])
         end
         for _, v in ipairs(ownercheck) do
-            if v == true then
+            if v == true or padmessage[1] == "opencam" then
                 lock = false
                 break
             end
@@ -2605,11 +2813,122 @@ local function speedaudio()
                 caraudio("gear3")
             end
         end
-        sleep(0.01)
+        os.sleep(0.01)
     end
 end
 
+local function backcam()
+    while true do
+        if gear == "R" and (padmessage[1] == "offcam" or type(padmessage[1]) == "nil") then
+            backcamwidth = 15
+            backcamheight = 10
+            height_pitch_range = height_pitch_range * (backcamheight/backcamwidth)
+            screen1.setTextScale(0.5)
+            for i = 1, screen1height do
+                screen1.setCursorPos(20, i)
+                screen1.blit("                ","ffffffffffffffff","ffffffffffffffff")
+            end
+            screen1.setCursorPos(21, 1)
+            table_insert = table.insert                
+                x_axis = linspace(-width_yaw_range, width_yaw_range, backcamwidth)
+                y_axis = linspace(-height_pitch_range, height_pitch_range, backcamheight)
+                while true do
+                    screen1.setCursorPos(21, 1)
+                    os.sleep(0.01)
+                for y=1, backcamheight do
+                for x=1, backcamwidth do               
+                    yr = y_axis[y]
+                    xr = x_axis[x]                
+                    basu, backitem = pcall(backrc)
+                    if basu == true then
+                        pix =  get_pixel_normal(backitem)
+                        screen1.setCursorPos(x + 20, backcamheight - y + 1)
+                        screen1.blit(" ", "0", pix[3])
+                    end
+                end end
+                    if gear ~= "R" or padmessage[1] == "opencam"then
+                        screen1.setTextScale(0.5)
+                        for i = 1, screen1height do
+                            screen1.setCursorPos(20, i)
+                            screen1.blit("                ","ffffffffffffffff","ffffffffffffffff")
+                        end
+                        screen1.setCursorPos(21, 1)
+                        break
+                    end
+                end
+        else
+            os.sleep(0.01)
+        end
+    end
+end
+
+local function padrec()
+    local id
+    while true do
+        repeat
+            id, padmessage = rednet.receive()
+        until id == padid
+    end
+end
+
+local function webcam()
+    while true do
+        if type(padmessage[1]) ~= "nil" then
+            if padmessage[1] == "opencam" then
+                webcamwidth = 26
+                webcamheight = 16        
+                height_pitch_range = height_pitch_range * (webcamheight/webcamwidth)
+                table_insert = table.insert                   
+                    x_axis = linspace(-width_yaw_range, width_yaw_range, webcamwidth)
+                    y_axis = linspace(-height_pitch_range, height_pitch_range, webcamheight)
+                    while type(padmessage[1]) ~= "nil" do
+                        if padmessage[1] ~= "opencam" then
+                            break
+                        end
+                        for y=1, webcamheight do
+                            wpix = ""
+
+                            for x=1, webcamwidth do
+                                yr = y_axis[y]
+                                xr = x_axis[x]
+                                if gear == "R" then
+                                    bawsu, backwebitem = pcall(backrc)
+                                    if bawsu == true then
+                                        pix = get_pixel_normal(backwebitem)
+                                        wpix = wpix .. pix[3]
+                                    end
+                                else
+                                    item = frc.raycast(max_distance, {yr, xr, vector_fov}, euler_mode, true, cache, true)
+                                    pix = get_pixel_normal(item)
+                                    wpix = wpix .. pix[3]
+                                end
+                            end
+                            if #wpix == webcamwidth then
+                                carsend[1] = carname
+                                carsend[2] = "x:" .. math.floor(pos.x) .. "y:" .. math.floor(pos.y) .. "z:" .. math.floor(pos.z)
+                                carsend[3] = {y,wpix}
+                                carsend[4] = gear
+                                carsend[5] = carbreak
+                                rednet.send(padid, carsend)
+                            end
+                            os.sleep(0.01)
+                        end                        
+                    end
+            else
+                os.sleep(0.01)
+            end
+        else
+            os.sleep(0.01)
+        end
+
+    end
+end
 
 while true do
-    parallel.waitForAll(speedaudio,monitortouch,lockGUI,carnameGUI,batteryGUI,gearcontrol,speedcontrol,speedGUI,batterycontrol,muiscGUItouch,musiccontrol,musicnamedisplay,musicGUI,speedcont,speedcontGUI,rsinput,swheelGUI,swheelback,swheelcontrol,RLlightGUI,clock,powerGUI)
+    parallel.waitForAll(
+        webcam,backcam,speedaudio,monitortouch,lockGUI,
+        carnameGUI,batteryGUI,gearcontrol,speedcontrol,speedGUI,
+        batterycontrol,muiscGUItouch,musiccontrol,musicnamedisplay,musicGUI,
+        speedcont,speedcontGUI,rsinput,swheelGUI,swheelback,
+        swheelcontrol,RLlightGUI,clock,powerGUI,padrec)
 end
