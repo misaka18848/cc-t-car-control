@@ -2227,8 +2227,10 @@ local function muiscGUItouch()
 
                 -- 如果找到了 .dfpwm 文件
                 if dfpwmFileFound then
-                    musicpause = "on"
-                    os.pullEvent("speaker_audio_empty")
+                    if musicpause == "off" then
+                        musicpause = "on"
+                        os.pullEvent("speaker_audio_empty")
+                    end
                     screen.setTextScale(1)
                     screen.setCursorPos(6,5)
                     screen.blit(">","f","1")
@@ -2277,8 +2279,10 @@ local function muiscGUItouch()
 
                 -- 如果找到了 .dfpwm 文件
                 if dfpwmFileFound then
-                    musicpause = "on"
-                    os.pullEvent("speaker_audio_empty")
+                    if musicpause == "off" then
+                        musicpause = "on"
+                        os.pullEvent("speaker_audio_empty")
+                    end
                     screen.setTextScale(1)
                     screen.setCursorPos(1,5)
                     screen.blit("<","f","2")
@@ -2326,8 +2330,10 @@ local function muiscGUItouch()
 
                 -- 如果找到了 .dfpwm 文件
                 if dfpwmFileFound then
-                    musicpause = "on"
-                    os.pullEvent("speaker_audio_empty")
+                    if musicpause == "off" then
+                        musicpause = "on"
+                        os.pullEvent("speaker_audio_empty")
+                    end
                     screen.setTextScale(1)
                     screen.setCursorPos(7,5)
                     screen.blit("R","f","d")
@@ -2372,6 +2378,7 @@ local function musiccontrol()
                 -- 检查是否暂停
                 if musicpause == "on" then
                     speaker.stop()
+                    os.pullEvent("speaker_audio_empty")
                     break
                 end
         
@@ -2398,6 +2405,7 @@ local function musiccontrol()
                 -- 检查是否暂停
                 if musicpause == "on" then
                     speaker.stop()
+                    os.pullEvent("speaker_audio_empty")
                     break
                 end
         
