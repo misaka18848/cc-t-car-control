@@ -1,8 +1,8 @@
 
 --左侧屏幕名称
-local Lscreen = "monitor_9"
+local Lscreen = "monitor_8"
 --右侧屏幕(至少俩格宽)名称
-local Rscreen = "monitor_5"
+local Rscreen = "monitor_9"
 --左侧屏幕是否透明
 local LscreenTransparent = true
 if peripheral.isPresent(Lscreen) == false then
@@ -32,7 +32,7 @@ screen.setCursorPos(2,2)
 screen.blit("carOS","000ff","ccc00")
 os.sleep(1)
 screen.setCursorPos(3,1) 
-screen.blit("5.0","fff","444")
+screen.blit("6.0","fff","aaa")
 os.sleep(1)
 screen.setCursorPos(2,4) 
 screen.blit("MISAKA","000000","111111")
@@ -42,9 +42,9 @@ os.sleep(1)
 screen.setCursorPos(1,3)
 screen.blit("booting","0000000","fffffff")
 --输入油门刹车方向盘加档信号用的红石接口名称
-local RIinput = "redstoneIntegrator_4"
+local RIinput = "redstoneIntegrator_25"
 --输入加减档信号用的红石接口名称
-local RIinput1 = "redstoneIntegrator_7"
+local RIinput1 = "redstoneIntegrator_23"
 --左轮信号输入（无线红石信号遥控器的A键）在红石接口上的方向
 local RIinput_leftwheel = "right"
 --右轮信号输入（无线红石信号遥控器的D键）在红石接口上的方向
@@ -52,37 +52,39 @@ local RIinput_rightwheel = "left"
 --油门信号输入（无线红石信号遥控器的W键）在红石接口上的方向
 local RIinput_speedup = "top"
 --刹车信号输入（无线红石信号遥控器的S键）在红石接口上的方向
-local RIinput_speeddown = "down"
+local RIinput_speeddown = "bottom"
 --加档信号输入（无线红石信号遥控器的空格键）在红石接口上的方向
 local RIinput_upgear = "front"
 --降档信号输入（无线红石信号遥控器的shift键）在红石接口上的方向
-local RIinput1_downgear = "right"
+local RIinput1_downgear = "left"
 --输出左轮和左转向灯信号用的红石接口名称
-local RILWL = "redstoneIntegrator_2"
+local RILWL = "redstoneIntegrator_24"
 --输出右轮和右转向灯信号用的红石接口名称
-local RIRWL = "redstoneIntegrator_3"
---数字适配器名称
-local da_name = "digital_adapter_4"
+local RIRWL = "redstoneIntegrator_22"
+--转速控制器名称
+local da_name = "Create_RotationSpeedController_6"
 --转速控制器在数字适配器的哪侧
-local spct = "left"
+--local spct = "right"
 --电池名称
-local battery_name = "modular_accumulator_3"
+local battery_name = "modular_accumulator_7"
 --音乐扬声器名称
-local speaker_name = "speaker_1"
+local speaker_name = "speaker_3"
 --音效扬声器名称
-local speaker1_name = "speaker_2"
+local speaker1_name = "speaker_4"
 --启用汽车音效
-local Car_Audio = false
+local Car_Audio = true
 --掌上无线/末影电脑id
-local padid = 14
+local padid = 9
 --后侧raycaster名称
-local brc_name = "raycaster_0"
+local brc_name = "raycaster_4"
 --前侧raycaster名称
-local frc_name = "raycaster_1"
+local frc_name = "raycaster_5"
+--软盘驱动器名称
+local drivename = "drive_0"
 --无线调制解调器装在电脑的哪侧
-local wirelessmodem = "front"
+local wirelessmodem = "left"
 --玩家检测器名称
-local playerDetector_name = "playerDetector_0"
+local playerDetector_name = "playerDetector_1"
 --锁车距离
 local lockrange = 5
 --拥有车的玩家名
@@ -93,25 +95,30 @@ local ownername = {
     "Ananab"
 }
 --电动马达名称
-local motor_name = "electric_motor_2"
+local motor_name = "electric_motor_12"
 --输出左/右轮和左/右转向灯信号在各红石接口上的方向
 local RIoutput_leftwheel = "back"
 local RIoutput_rightwheel = "back"
-local RIoutput_leftfrontlight = "top"
-local RIoutput_rightfrontlight = "top"
-local RIoutput_leftbacklight = "front"
-local RIoutput_rightbacklight = "front"
+local RIoutput_leftfrontlight = "left"
+local RIoutput_rightfrontlight = "right"
+local RIoutput_leftbacklight = "right"
+local RIoutput_rightbacklight = "left"
 --车名（15字以内，只能使用ASCII字符,该名也会变成该瓦尔基里的名字）
-local carname = "Mi SU35 "
+local carname = "Misaka18848-RV"
 --车名文字颜色
-local carnamecolor1 = "1"
+local carnamecolor1 = "f"
 --车名背景颜色
 local carnamecolor2 = "7"
 --车名文字随机颜色
-local carnameautocolor1 = true
+local carnameautocolor1 = false
 --车名背景随机颜色
 local carnameautocolor2 = true
-
+--音乐音量(0-3)
+local musicvol = 1.5
+--汽车音效音量(0-3)
+local carvol = 0.5
+--喇叭音量
+local hornsvol = 3
 local bootcheck = true
 local bootcheck2 = true
 local screen1width, screen1height =screen1.getSize()
@@ -262,6 +269,9 @@ os.sleep(0.1)
 screen1.setCursorPos(1,7)
 screen1.write("WIFI")
 os.sleep(0.1)
+screen1.setCursorPos(1,8)
+screen1.write("drive")
+os.sleep(0.1)
 screen1.setCursorPos(1,10)
 screen1.write("check2/2")
 os.sleep(0.1)
@@ -331,6 +341,16 @@ else
     bootcheck2 = false
 end
 os.sleep(0.1)
+screen1.setCursorPos(11,8)
+if peripheral.isPresent(drivename) == false then
+    screen1.setTextColor(colors.red)
+    screen1.write('Error')
+    bootcheck2 = false
+else
+    screen1.setTextColor(colors.green)
+    screen1.write('Done')
+end
+os.sleep(0.1)
 screen1.setCursorPos(12,1)
 if bootcheck2 == false then
     screen1.setTextColor(colors.red)
@@ -355,6 +375,8 @@ local RIoutputRightWheelandLight = peripheral.wrap(RIRWL)
 local pd = peripheral.wrap(playerDetector_name)
 local brc = peripheral.wrap(brc_name)
 local frc = peripheral.wrap(frc_name)
+local dr = peripheral.wrap(drivename)
+da.setTargetSpeed(0)
 local padmessage = {}
 local carsend = {}
 local lock = true
@@ -362,7 +384,11 @@ local gear = "0"
 local nextgear = "0"
 local trygear = "0"
 local carbreak = "on"
+local disco = "f"
+local disbg = "4"
+--开车BGM设置
 local caraudioplay = true
+local diskstat = false
 --电动马达各档转速设置
 local motorspeedlv1 = 1
 local motorspeedlv2 = 50
@@ -373,7 +399,9 @@ local data = {
     block = {
         minecraft = {
             gold_block = "4",
-    
+            
+            torch = "4",
+
             polished_diorite = "8",
             stone = "8",
             iron_ore = "8",
@@ -398,7 +426,11 @@ local data = {
             acacia_leaves = "5",
     
             crimson_planks = "a",
-            }
+            },
+        create = {
+            andesite_casing = "c",
+            industrial_iron_block = "7"
+        }
         }
     }
 local item = {}
@@ -419,9 +451,9 @@ rednet.open(wirelessmodem)
 local batterylink = "off"
 local musicpause = "on"
 local dfpwm = require("cc.audio.dfpwm")
-
+local musicdirectory = "music/" 
 local decoder = dfpwm.make_decoder()
-
+local odiskstat = false 
 local motorspeed = motorspeedlv1
 fs.makeDir('music')
 local musicfiles = fs.list("music")
@@ -430,7 +462,8 @@ local allmusic = #musicfiles
 local nowplayname = "PLAY"
 local displaymusicname = {}
 local currentIndex = 1
-local campix = 1
+local mindistance = 0
+local alldistance = {}
 local carpos = ship.getWorldspacePosition()
 local lockpos1 = {}
 local lockpos2 = {}
@@ -479,9 +512,14 @@ local batterytext = ""
 local ottoup = false
 local ottodown = false
 local buffer = {}
+local carbuffer = {}
 local pix = {}
 local table_insert = table.insert
-
+local file = {}
+local musicchunk = ""
+local musicchunks = {}
+local files = {}
+local dfpwmFileFound = false
 local function linspace(start, end_, num)
     local linspaced = {}
     if num == 0 then return linspaced end
@@ -520,6 +558,7 @@ local function get_pixel_normal(item)
 
     return {" ", "0", "e"}
 end
+
 local yr = 1
 local xr = 1
 local y_axis = {}
@@ -544,8 +583,8 @@ local function caraudio(nowplayaudio)
                     speaker1.stop()
                     break
                 end
-                buffer = decoder(chunk)
-                while not speaker1.playAudio(buffer) do
+                carbuffer = decoder(chunk)
+                while not speaker1.playAudio(carbuffer,carvol) do
                     os.pullEvent("speaker_audio_empty")
                 end
                 if gear ~= nextgear or rsinput_speedup == false or rsinput_speeddown == true or carbreak == "on" and gear ~= "0" then
@@ -557,8 +596,8 @@ local function caraudio(nowplayaudio)
         end
         if gear ~= nextgear then
             for chunk in io.lines("caraudio/shiftgear.dfpwm", 16 * 1024) do
-                buffer = decoder(chunk)
-                while not speaker1.playAudio(buffer) do
+                carbuffer = decoder(chunk)
+                while not speaker1.playAudio(carbuffer,carvol) do
                     os.pullEvent("speaker_audio_empty")
                 end
             end
@@ -566,8 +605,8 @@ local function caraudio(nowplayaudio)
         end
         if carbreak == "on" and gear == nextgear then
             for chunk in io.lines("caraudio/handbreak.dfpwm", 16 * 1024) do
-                buffer = decoder(chunk)
-                while not speaker1.playAudio(buffer) do
+                carbuffer = decoder(chunk)
+                while not speaker1.playAudio(carbuffer,carvol) do
                     os.pullEvent("speaker_audio_empty")
                 end
             end
@@ -575,7 +614,7 @@ local function caraudio(nowplayaudio)
     end
 end
 
-da.setTargetSpeed("left", 0)
+da.setTargetSpeed(0)
 
 screen.setCursorPos(1,3)
 screen.blit("-Touch-","0000000","fffffff")
@@ -656,7 +695,7 @@ screen1.blit("1234",'0fff','5000')
 
 
 screen1.setCursorPos(1,7)
-screen1.blit("5.0",'fff','444')
+screen1.blit("6.0",'fff','aaa')
 screen1.setCursorPos(1,8)
 screen1.blit("carOS",'000ff','ccc00')
 screen1.setCursorPos(1,9)
@@ -703,32 +742,9 @@ local function speedGUI()
                     trygear = '5'
                     mousey = -1
                 end
-                if (mousex <= 5 and mousey == 4 and mousex >= 1) or padmessage[5] == "break" then
-                    screen.setTextScale(1)
-                    screen.setCursorPos(1,4)
-                    screen.blit("BREAK",'00000','eeeee')
-                    carbreak = "on"
-                    if gear ~= "0" and gear ~= "1" and gear ~="R" then
-                        caraudio()
-                        os.sleep(2)
-                    end
-                    nextgear = "0"
-                    os.sleep(0.5)
-                    mousey = -1
-                    padmessage[5] = ""
-                end
+
             end
-            if carbreak == "on" then
-                if (mousex <= 5 and mousey == 4 and mousex >= 1) or padmessage[5] == "break" then
-                    screen.setTextScale(1)
-                    screen.setCursorPos(1,4)
-                    screen.blit("BREAK",'fffff','00000')
-                    carbreak = "off"
-                    os.sleep(0.5)
-                    mousey = -1
-                    padmessage[5] = ""
-                end
-            end
+
         end
         os.sleep(0.01)
         if event == "monitor_touch" and monitorside == Lscreen and lock == false then
@@ -749,6 +765,10 @@ local function speedGUI()
                     screen1.setTransparentColor(colors.black)
                 end
                 os.reboot()
+            end
+            if mousex <= 11 and mousey <= 7 and mousey >=3 and mousex >= 5 then
+                mousey = -1
+                speaker1.playSound("create:whistle_low",hornsvol,2)
             end
         end
 
@@ -1747,7 +1767,7 @@ end
 
 local function gearcontrol()
     while true do
-        print(padmessage[2])
+        --print(padmessage[2])
         if carbreak == "off" then
             if (rsinput1_downgear == true and rsinput_upgear == false) or padmessage[2] == "downgear" then
                 if gear == nextgear then
@@ -2043,7 +2063,7 @@ local function speedcontrol()
             end
             os.sleep(0.05)
         end
-        da.setTargetSpeed(spct, RPM)
+        da.setTargetSpeed(RPM)
         if TRPM == RPM then
             screen.setTextScale(1)
             screen.setCursorPos(5,2)
@@ -2144,16 +2164,40 @@ local function muiscGUItouch()
         if event == "monitor_touch" and monitorside == Rscreen  and lock == false then
             if mousex <= 5 and mousey == 5 and mousex >= 2 and musicpause == "on" then
                 mousey = -1
-                musicpause = "off"
-                displaymusicname = {}
-                nowplayname = musicfiles[nowplaymusic]:sub(1,#musicfiles[nowplaymusic] - 6)
-                while #nowplayname % 4 ~= 0 do
-                    nowplayname = nowplayname .. ' '
+                if diskstat == true then
+                    musicdirectory = "disk/music" 
+                else
+                    musicdirectory = "music" 
                 end
-                for i = 1, #nowplayname, 4 do
-                    table.insert(displaymusicname, nowplayname:sub(i, i + 4 - 1))
+                -- 列出指定目录中的所有文件和子目录
+                files, _ = fs.list(musicdirectory)
+
+                -- 假设没有找到 .dfpwm 文件
+                dfpwmFileFound = false
+
+                -- 遍历目录内容
+                for i = 1 , #files do
+                    -- 检查文件是否以 .dfpwm 结尾
+                    if string.match(files[i], "%.dfpwm$") then
+                        dfpwmFileFound = true
+                        break  -- 找到一个就退出循环
+                    end
                 end
-                currentIndex = 1
+
+                -- 如果找到了 .dfpwm 文件
+                if dfpwmFileFound then
+                    musicpause = "off"
+                    displaymusicname = {}
+                    nowplayname = musicfiles[nowplaymusic]:sub(1,#musicfiles[nowplaymusic] - 6)
+                    while #nowplayname % 4 ~= 0 do
+                        nowplayname = nowplayname .. ' '
+                    end
+                    for i = 1, #nowplayname, 4 do
+                        table.insert(displaymusicname, nowplayname:sub(i, i + 4 - 1))
+                    end
+                    currentIndex = 1
+                end
+
             end
             if mousex <= 5 and mousey == 5 and mousex >= 2 and musicpause == "off" then
                 mousey = -1
@@ -2161,75 +2205,148 @@ local function muiscGUItouch()
             end
             if mousex == 6 and mousey == 5 then
                 mousey = -1
-                musicpause = "on"
-                screen.setTextScale(1)
-                screen.setCursorPos(6,5)
-                screen.blit(">","f","1")
-                nowplaymusic = nowplaymusic + 1
-                if nowplaymusic > allmusic then
-                    nowplaymusic = 1
+                if diskstat == true then
+                    musicdirectory = "disk/music" 
+                else
+                    musicdirectory = "music" 
                 end
-                displaymusicname = {}
-                nowplayname = musicfiles[nowplaymusic]:sub(1,#musicfiles[nowplaymusic] - 6)
-                while #nowplayname % 4 ~= 0 do
-                    nowplayname = nowplayname .. ' '
+                -- 列出指定目录中的所有文件和子目录
+                files, _ = fs.list(musicdirectory)
+
+                -- 假设没有找到 .dfpwm 文件
+                dfpwmFileFound = false
+
+                -- 遍历目录内容
+                for i = 1 , #files do
+                    -- 检查文件是否以 .dfpwm 结尾
+                    if string.match(files[i], "%.dfpwm$") then
+                        dfpwmFileFound = true
+                        break  -- 找到一个就退出循环
+                    end
                 end
-                for i = 1, #nowplayname, 4 do
-                    table.insert(displaymusicname, nowplayname:sub(i, i + 4 - 1))
+
+                -- 如果找到了 .dfpwm 文件
+                if dfpwmFileFound then
+                    musicpause = "on"
+                    os.pullEvent("speaker_audio_empty")
+                    screen.setTextScale(1)
+                    screen.setCursorPos(6,5)
+                    screen.blit(">","f","1")
+                    nowplaymusic = nowplaymusic + 1
+                    if nowplaymusic > allmusic then
+                        nowplaymusic = 1
+                    end
+                    displaymusicname = {}
+                    nowplayname = musicfiles[nowplaymusic]:sub(1,#musicfiles[nowplaymusic] - 6)
+                    while #nowplayname % 4 ~= 0 do
+                        nowplayname = nowplayname .. ' '
+                    end
+                    for i = 1, #nowplayname, 4 do
+                        table.insert(displaymusicname, nowplayname:sub(i, i + 4 - 1))
+                    end
+                    currentIndex = 1
+                    os.sleep(1)
+                    musicpause = "off"
+                    screen.setTextScale(1)
+                    screen.setCursorPos(6,5)
+                    screen.blit(">","f","a")
                 end
-                currentIndex = 1
-                os.sleep(1)
-                musicpause = "off"
-                screen.setTextScale(1)
-                screen.setCursorPos(6,5)
-                screen.blit(">","f","a")
+
             end
             if mousex == 1 and mousey == 5 then
                 mousey = -1
-                musicpause = "on"
-                screen.setTextScale(1)
-                screen.setCursorPos(1,5)
-                screen.blit("<","f","2")
-                nowplaymusic = nowplaymusic - 1
-                if nowplaymusic == 0 then
-                    nowplaymusic = allmusic
+                if diskstat == true then
+                    musicdirectory = "disk/music" 
+                else
+                    musicdirectory = "music" 
                 end
-                displaymusicname = {}
-                nowplayname = musicfiles[nowplaymusic]:sub(1,#musicfiles[nowplaymusic] - 6)
-                while #nowplayname % 4 ~= 0 do
-                    nowplayname = nowplayname .. ' '
+                -- 列出指定目录中的所有文件和子目录
+                files, _ = fs.list(musicdirectory)
+
+                -- 假设没有找到 .dfpwm 文件
+                dfpwmFileFound = false
+
+                -- 遍历目录内容
+                for i = 1 , #files do
+                    -- 检查文件是否以 .dfpwm 结尾
+                    if string.match(files[i], "%.dfpwm$") then
+                        dfpwmFileFound = true
+                        break  -- 找到一个就退出循环
+                    end
                 end
-                for i = 1, #nowplayname, 4 do
-                    table.insert(displaymusicname, nowplayname:sub(i, i + 4 - 1))
+
+                -- 如果找到了 .dfpwm 文件
+                if dfpwmFileFound then
+                    musicpause = "on"
+                    os.pullEvent("speaker_audio_empty")
+                    screen.setTextScale(1)
+                    screen.setCursorPos(1,5)
+                    screen.blit("<","f","2")
+                    nowplaymusic = nowplaymusic - 1
+                    if nowplaymusic == 0 then
+                        nowplaymusic = allmusic
+                    end
+                    displaymusicname = {}
+                    nowplayname = musicfiles[nowplaymusic]:sub(1,#musicfiles[nowplaymusic] - 6)
+                    while #nowplayname % 4 ~= 0 do
+                        nowplayname = nowplayname .. ' '
+                    end
+                    for i = 1, #nowplayname, 4 do
+                        table.insert(displaymusicname, nowplayname:sub(i, i + 4 - 1))
+                    end
+                    currentIndex = 1
+                    os.sleep(0.5)
+                    musicpause = "off"
+                    screen.setTextScale(1)
+                    screen.setCursorPos(1,5)
+                    screen.blit("<","f","6")
                 end
-                currentIndex = 1
-                os.sleep(1)
-                musicpause = "off"
-                screen.setTextScale(1)
-                screen.setCursorPos(1,5)
-                screen.blit("<","f","6")
             end
             if mousex == 7 and mousey == 5 then
                 mousey = -1
-                musicpause = "on"
-                screen.setTextScale(1)
-                screen.setCursorPos(7,5)
-                screen.blit("R","f","d")
-                nowplaymusic = math.random(allmusic)
-                displaymusicname = {}
-                nowplayname = musicfiles[nowplaymusic]:sub(1,#musicfiles[nowplaymusic] - 6)
-                while #nowplayname % 4 ~= 0 do
-                    nowplayname = nowplayname .. ' '
+                if diskstat == true then
+                    musicdirectory = "disk/music" 
+                else
+                    musicdirectory = "music" 
                 end
-                for i = 1, #nowplayname, 4 do
-                    table.insert(displaymusicname, nowplayname:sub(i, i + 4 - 1))
+                -- 列出指定目录中的所有文件和子目录
+                files, _ = fs.list(musicdirectory)
+
+                -- 假设没有找到 .dfpwm 文件
+                dfpwmFileFound = false
+
+                -- 遍历目录内容
+                for i = 1 , #files do
+                    -- 检查文件是否以 .dfpwm 结尾
+                    if string.match(files[i], "%.dfpwm$") then
+                        dfpwmFileFound = true
+                        break  -- 找到一个就退出循环
+                    end
                 end
-                currentIndex = 1
-                os.sleep(1)
-                musicpause = "off"
-                screen.setTextScale(1)
-                screen.setCursorPos(7,5)
-                screen.blit("R","f","5")
+
+                -- 如果找到了 .dfpwm 文件
+                if dfpwmFileFound then
+                    musicpause = "on"
+                    os.pullEvent("speaker_audio_empty")
+                    screen.setTextScale(1)
+                    screen.setCursorPos(7,5)
+                    screen.blit("R","f","d")
+                    nowplaymusic = math.random(allmusic)
+                    displaymusicname = {}
+                    nowplayname = musicfiles[nowplaymusic]:sub(1,#musicfiles[nowplaymusic] - 6)
+                    while #nowplayname % 4 ~= 0 do
+                        nowplayname = nowplayname .. ' '
+                    end
+                    for i = 1, #nowplayname, 4 do
+                        table.insert(displaymusicname, nowplayname:sub(i, i + 4 - 1))
+                    end
+                    currentIndex = 1
+                    os.sleep(1)
+                    musicpause = "off"
+                    screen.setTextScale(1)
+                    screen.setCursorPos(7,5)
+                    screen.blit("R","f","5")
+                end
             end
         end
         os.sleep(0.01)
@@ -2238,18 +2355,60 @@ end
 
 local function musiccontrol()
     while true do
-        if musicpause == "off" then
-            for chunk in io.lines("music/"..musicfiles[nowplaymusic], 16 * 1024) do
-                buffer = decoder(chunk)
+
+        if diskstat == false and musicpause == "off" then
+            file, _ = io.open("music/"..musicfiles[nowplaymusic],"rb")
+            musicchunks = {}
+            while true do
+                musicchunk = file:read(16 * 1024)  -- 读取16KB的数据
+                if not musicchunk then
+                    break  -- 文件结束
+                end
+                table.insert(musicchunks, musicchunk)
+            end
+            file:close()
+            for _, musicchunk in ipairs(musicchunks) do
+        
+                -- 检查是否暂停
                 if musicpause == "on" then
                     speaker.stop()
                     break
                 end
-                while not speaker.playAudio(buffer) do
+        
+                -- 处理数据块
+                buffer = decoder(musicchunk)
+                while not speaker.playAudio(buffer,musicvol) do
                     os.pullEvent("speaker_audio_empty")
                 end
             end
         end
+        if diskstat == true and musicpause == "off" then
+            file, _ = io.open("disk/music/"..musicfiles[nowplaymusic],"rb")
+            musicchunks = {}
+            while true do
+                musicchunk = file:read(16 * 1024)  -- 读取16KB的数据
+                if not musicchunk then
+                    break  -- 文件结束
+                end
+                table.insert(musicchunks, musicchunk)
+            end
+            file:close()
+            for _, musicchunk in ipairs(musicchunks) do
+        
+                -- 检查是否暂停
+                if musicpause == "on" then
+                    speaker.stop()
+                    break
+                end
+        
+                -- 处理数据块
+                buffer = decoder(musicchunk)
+                while not speaker.playAudio(buffer,musicvol) do
+                    os.pullEvent("speaker_audio_empty")
+                end
+            end
+        end
+
         os.sleep(0.01)
     end
 end
@@ -2835,17 +2994,38 @@ local function backcam()
                 while true do
                     screen1.setCursorPos(21, 1)
                     os.sleep(0.01)
+                    alldistance={}
                 for y=1, backcamheight do
-                for x=1, backcamwidth do               
-                    yr = y_axis[y]
-                    xr = x_axis[x]                
-                    basu, backitem = pcall(backrc)
-                    if basu == true then
-                        pix =  get_pixel_normal(backitem)
-                        screen1.setCursorPos(x + 20, backcamheight - y + 1)
-                        screen1.blit(" ", "0", pix[3])
+                    for x=1, backcamwidth do               
+                        yr = y_axis[y]
+                        xr = x_axis[x]                
+                        basu, backitem = pcall(backrc)
+                        if basu == true then
+                            pix =  get_pixel_normal(backitem)
+                            screen1.setCursorPos(x + 20, backcamheight - y + 1)
+                            screen1.blit(" ", "0", pix[3])
+                            table_insert(alldistance,backitem.distance)
+                        end
+                    end 
+                end
+                if #alldistance ~= 0 then
+                    mindistance = alldistance[1]
+                    for i, value in ipairs(alldistance) do
+                        -- 如果当前元素小于已知的最小值，则更新最小值
+                        if value < mindistance then
+                            mindistance = value
+                        end
                     end
-                end end
+                    mindistance = math.floor(mindistance)
+                    disco = "f"
+                    disbg = "4"
+                    for i = 1, #tostring(mindistance) do
+                        disco = disco .. "f"
+                        disbg = disbg .. "4"
+                    end
+                    screen1.setCursorPos(21, 1)
+                    screen1.blit(tostring(mindistance) .. "M",disco,disbg)
+                end
                     if gear ~= "R" or padmessage[1] == "opencam"then
                         screen1.setTextScale(0.5)
                         for i = 1, screen1height do
@@ -2924,11 +3104,88 @@ local function webcam()
     end
 end
 
+local function diskmusiccheck()
+    while true do
+        if dr.isDiskPresent() == true and disk.hasAudio(drivename) == false then
+            diskstat = true
+            screen1.setCursorPos(1, 6)
+            screen1.blit("CDin", "0000", "2222")
+            fs.makeDir('disk/music')
+            musicfiles = fs.list("disk/music")
+        else
+            diskstat = false
+            screen1.setCursorPos(1, 6)
+            screen1.blit("    ", "ffff", "ffff")
+            musicfiles = fs.list("music")
+        end
+        if odiskstat ~= diskstat then
+            nowplaymusic = 1
+            allmusic = #musicfiles
+        end
+        os.sleep(0.01)
+        odiskstat = diskstat
+    end
+end
+
+local function carbreakother()
+    while true do
+        os.sleep(0.01)
+        if carbreak == "off" then
+            if (mousex <= 5 and mousey == 4 and mousex >= 1 and event == "monitor_touch" and monitorside == Rscreen) or padmessage[5] == "break" or (rsinput1_downgear == true and rsinput_upgear == true) then
+                if rsinput1_downgear == true and rsinput_upgear == true then
+                    while rsinput1_downgear == true or rsinput_upgear == true do
+                        os.sleep(0.01)
+                    end
+                end
+                rsinput1_downgear = false
+                rsinput_upgear = false
+                screen.setTextScale(1)
+                screen.setCursorPos(1,4)
+                screen.blit("BREAK",'00000','eeeee')
+                carbreak = "on"
+                if gear ~= "0" and gear ~= "1" and gear ~="R" then
+                    caraudio()
+                    os.sleep(2)
+                end
+                rsinput1_downgear = false
+                rsinput_upgear = false
+                nextgear = "0"
+                os.sleep(0.5)
+                rsinput1_downgear = false
+                rsinput_upgear = false
+                mousey = -1
+                padmessage[5] = ""
+            end
+        end
+        
+        if carbreak == "on" then
+            if (mousex <= 5 and mousey == 4 and mousex >= 1 and event == "monitor_touch" and monitorside == Rscreen) or padmessage[5] == "break" or (rsinput1_downgear == true and rsinput_upgear == true) then
+                if rsinput1_downgear == true and rsinput_upgear == true then
+                    while rsinput1_downgear == true or rsinput_upgear == true do
+                        os.sleep(0.01)
+                    end
+                end
+                rsinput1_downgear = false
+                rsinput_upgear = false
+                screen.setTextScale(1)
+                screen.setCursorPos(1,4)
+                screen.blit("BREAK",'fffff','00000')
+                carbreak = "off"
+                os.sleep(0.5)
+                rsinput1_downgear = false
+                rsinput_upgear = false
+                mousey = -1
+                padmessage[5] = ""
+            end
+        end
+    end
+end
+
 while true do
     parallel.waitForAll(
-        webcam,backcam,speedaudio,monitortouch,lockGUI,
+        webcam,backcam,speedaudio,monitortouch,lockGUI,carbreakother,
         carnameGUI,batteryGUI,gearcontrol,speedcontrol,speedGUI,
-        batterycontrol,muiscGUItouch,musiccontrol,musicnamedisplay,musicGUI,
+        batterycontrol,muiscGUItouch,musiccontrol,musicnamedisplay,musicGUI,diskmusiccheck,
         speedcont,speedcontGUI,rsinput,swheelGUI,swheelback,
         swheelcontrol,RLlightGUI,clock,powerGUI,padrec)
 end
